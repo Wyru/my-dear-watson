@@ -1,7 +1,8 @@
-import { User } from "@models/User";
+import { User } from '@models/User'
 
 export class UserController {
-    test(){
-        const user  =  new User('Will', 'will@email.com');
-    }
+  test () {
+    const user = new User('Will', 'will@email.com')
+    console.log(user.email)
+  }
 }
