@@ -7,6 +7,7 @@
     "start": "node dist/server.js",
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpileOnly --ignore-watch node_modules src/server.ts",
     "test": "jest",
+    "migrate": "knex migrate:latest --knexfile ./src/knexfile.js",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored"
   },
   "keywords": [],
@@ -36,6 +37,8 @@
   },
   "dependencies": {
     "express": "^4.17.1",
+    "knex": "^0.21.1",
+    "mysql": "^2.18.1",
     "typescript": "^3.9.5"
   }
 }
