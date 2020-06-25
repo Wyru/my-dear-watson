@@ -15,25 +15,14 @@ Basta executar o comando
 ```
 npm run migrate
 ```
-Caso esteja utilizando um MYSQL mais recente pode ser que a senha
-
-do usuário esteja com um tipo de criptografia não suportadada pelo
-
-driver do knex.js.
-
-Para resolver este problema basta executar:
-
+Caso esteja utilizando a versão 8 do mySQL irá ocorrer um erro dizendo que o cliente não suporta o tipo de autenticação. Para saber mais sobre o problema clique  [aqui](https://stackoverflow.com/questions/50093144/mysql-8-0-client-does-not-support-authentication-protocol-requested-by-server).
   
-
+Para resolver este problema basta executar:
 ```
-
 ALTER USER 'user'@'host' IDENTIFIED WITH mysql_native_password BY 'password';
 
 flush privileges;
-
 ```
-
-  
 
 Substituindo user, host e password pelos valores corretos.
 
