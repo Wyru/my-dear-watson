@@ -6,7 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Teste Watson</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <style>
     :root {
       --bg: #E0FBFC;
@@ -61,10 +63,16 @@
 
     .comment>.text {
       width: 80%;
+      padding-right: 10px;
     }
 
     .comment > button {
       width: 20%;
+    }
+
+    .comment > button > i {
+      font-size: 1.5em;
+      margin-right: 5px;
     }
 
     button {
@@ -74,6 +82,10 @@
       color: var(--black);
       border-bottom: 10px solid var(--secondary);
       transition: all ease-in-out 200ms;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
     }
 
     button:hover {
@@ -218,7 +230,11 @@
 
           console.log(audio);
         } catch (error) {
-
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops... Alguma coisa deu errado!',
+            text: error.toString(),
+          });
         }
       }
 
@@ -246,7 +262,7 @@
                 "${comment.text}"
               </div>
               <button class="playButton" data-test="${comment.text}">
-                Ouvir
+                <i class="far fa-play-circle"></i> <div>Ouvir</div>
               </button>
             </div >
             `

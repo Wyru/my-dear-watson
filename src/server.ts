@@ -16,6 +16,7 @@ app.get('/', (request, response) => {
   response.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 
-app.listen(process.env.PORT || 3333).on('listening', () => {
-  console.log('listening on port 3333');
+app.listen(3333).on('listening', () => {
+  console.log('\n\x1b[30m\x1b[47m%s\x1b[0m', 'Test Watson');
+  console.log('\nrunning on \x1b[32m%s\x1b[0m', 'http://localhost:3333');
 });
