@@ -6,7 +6,7 @@
 
 Execute o comando ```npm install``` para instalar as dependências.
 
-Crie um banco de dados em uma instância mySQL e configure a conexão em um arquivo ```.env``` usando como base o arquivo `.env.example`.
+Crie um banco de dados em uma instância mySQL e configure a conexão em um arquivo ```.env```, na pasta raiz do projeto, usando como base o arquivo `.env.example`.
   
 
 ## Rodando Migrations
