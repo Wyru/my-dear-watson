@@ -2,8 +2,8 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-export namespace Knex {
-  export const config = {
+const Knex = {
+  config: {
     client: 'mysql',
     connection: {
       host: process.env.DATABASE_HOSTNAME,
@@ -12,7 +12,7 @@ export namespace Knex {
       password: process.env.DATABASE_PASSWORD,
       port: process.env.DATABASE_PORT
     }
-  };
-}
+  }
+};
 
 export default { Knex };

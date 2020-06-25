@@ -1,6 +1,6 @@
 require('ts-node').register();
 
-const { config } = require('./src/config').Knex;
+const { config } = require('./src/config').default.Knex;
 
 module.exports = {
   development: {

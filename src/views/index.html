@@ -36,7 +36,8 @@
     }
 
     .col {
-      width: 49%;
+      width: 50%;
+      padding: 10px;
     }
 
     .text-area-container,
@@ -61,13 +62,13 @@
       position: relative;
     }
 
-    .comment>.text {
+    .comment >.text {
       width: 80%;
       padding-right: 10px;
     }
 
     .comment > button {
-      width: 20%;
+      width: 15%;
     }
 
     .comment > button > i {
@@ -100,21 +101,34 @@
     
     .delete {
       position: absolute;
+      right: -20px;
+      cursor: pointer;
+    }
+
+    .delete i {
       color: var(--red)!important;
       font-weight: bold;
-      left: -10px;
-      top: -3px;
-      cursor: pointer;
       transition: all ease-in-out 100ms;
     }
 
-    .delete:hover {
+    .delete i:hover {
       filter: brightness(.9);
     }
 
     .delete:active {
       filter: brightness(.8);
       transform: translateY(2px);
+    }
+
+    .separator{
+      position: fixed;
+      width: 4px;
+      height: 80vh;
+      top: 10vh;
+      left: calc(50vw - 12px);
+      background-color: var(--black);
+      filter: opacity(.3);
+      border-radius: 10px;
     }
 
   </style>
@@ -131,6 +145,7 @@
         <button id="createComment">Cadastrar</button>
       </div>
     </div>
+    <div class="separator"></div>
     <div class="col">
       <div>
         <select id="voice">
@@ -182,15 +197,6 @@
       </div>
       <h1 class="title">Comentários</h1>
       <div class="comments" id="commentsContainer">
-        <div class="comment">
-          <div class="text">
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis"
-          </div>
-          <button class="playButton">
-            Ouvir
-          </button>
-        </div>
       </div>
     </div>
   </div>
@@ -244,7 +250,11 @@
           await axios.delete(`http://localhost:3333/api/comments/${id}`);
           updateComments();
         } catch (error) {
-          console.log(error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops... Alguma coisa deu errado!',
+            text: error.toString(),
+          });
         }
       }
 
@@ -257,13 +267,15 @@
           result.data.data.forEach(comment => {
             commentsContainerEl.innerHTML += `
             <div class="comment">
-              <div class="delete" data-id="${comment.id}">X</div>
               <div class="text">
                 "${comment.text}"
               </div>
               <button class="playButton" data-test="${comment.text}">
                 <i class="far fa-play-circle"></i> <div>Ouvir</div>
               </button>
+              <div class="delete" data-id="${comment.id}">
+                <i class="fas fa-trash-alt"></i>
+              </div>
             </div >
             `
           });
@@ -295,7 +307,11 @@
         try {
           await axios.post("http://localhost:3333/api/comments", { text: comment });
         } catch (error) {
-          console.log(error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops... Alguma coisa deu errado!',
+            text: error.toString(),
+          });
         }
       }
 
