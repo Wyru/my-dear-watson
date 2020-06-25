@@ -15,6 +15,9 @@ app.delete('/api/comments/:id', Comment.destroy);
 app.get('/', (request, response) => {
   response.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
+app.get('/favicon.ico', (request, response) => {
+  response.sendFile(path.join(__dirname, 'assets', 'favicon.ico'));
+});
 
 app.listen(3333).on('listening', () => {
   console.log('\n\x1b[30m\x1b[47m%s\x1b[0m', 'Test Watson');
