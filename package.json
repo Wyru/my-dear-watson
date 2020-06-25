@@ -7,7 +7,7 @@
     "start": "node dist/server.js",
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpileOnly --ignore-watch node_modules src/server.ts",
     "test": "jest",
-    "migrate": "knex migrate:latest --knexfile ./src/knexfile.js",
+    "migrate": "knex migrate:latest",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored"
   },
   "keywords": [],

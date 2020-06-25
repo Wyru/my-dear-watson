@@ -6,7 +6,7 @@ module.exports = {
   development: {
     ...config,
     migrations: {
-      directory: './database/migrations'
+      directory: './src/database/migrations'
     }
   }
 };
