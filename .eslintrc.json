@@ -20,7 +20,9 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "semi":[2, "always"],
         "no-console": "off",
+        "no-unused-vars":"off",
         "import/prefer-default-export": "off",
         "@typescript-eslint/naming-convention": [
             "error",

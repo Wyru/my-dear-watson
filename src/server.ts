@@ -1,14 +1,21 @@
-import express from 'express'
-import { UserController } from '@controllers/UserController'
+import express from 'express';
+import Comment from '@controllers/comments';
+import cors from 'cors';
 
-const app = express()
+const path = require('path');
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+app.post('/api/comments', Comment.create);
+app.get('/api/comments', Comment.all);
+app.delete('/api/comments/:id', Comment.destroy);
 
 app.get('/', (request, response) => {
-  return response.json({
-    message: 'Hello World!'
-  })
-})
+  response.sendFile(path.join(__dirname, 'views', 'index.html'));
+});
 
 app.listen(process.env.PORT || 3333).on('listening', () => {
-  console.log('listening on port 3333')
-})
+  console.log('listening on port 3333');
+});

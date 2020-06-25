@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teste Watson</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <style>
+    :root {
+      --bg: #E0FBFC;
+      --red: #EE6C4D;
+      --black: #293241;
+      --primary: #98c1d9;
+      --secondary: #3D5A80;
+    }
+
+    * {
+      font-family: 'Roboto Mono', monospace;
+      color: var(--black);
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      background-color: var(--bg);
+    }
+
+    .root {
+      display: flex;
+      padding: 20px;
+    }
+
+    .col {
+      width: 49%;
+    }
+
+    .text-area-container,
+    .button-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 5px;
+    }
+
+    .text-area-container>textarea,
+    .button-container>button {
+      width: 80%;
+    }
+
+    .comment {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-bottom: 20px;
+      min-height: 45px;
+      position: relative;
+    }
+
+    .comment>.text {
+      width: 80%;
+    }
+
+    .comment > button {
+      width: 20%;
+    }
+
+    button {
+      background-color: var(--red);
+      padding-bottom: 10px;
+      padding-top: 5px;
+      color: var(--black);
+      border-bottom: 10px solid var(--secondary);
+      transition: all ease-in-out 200ms;
+    }
+
+    button:hover {
+      filter: brightness(.9);
+    }
+
+    button:active {
+      filter: brightness(.8);
+      border-bottom: 5px solid var(--secondary);
+      transform: translateY(4px);
+    }
+    
+    .delete {
+      position: absolute;
+      color: var(--red)!important;
+      font-weight: bold;
+      left: -10px;
+      top: -3px;
+      cursor: pointer;
+      transition: all ease-in-out 100ms;
+    }
+
+    .delete:hover {
+      filter: brightness(.9);
+    }
+
+    .delete:active {
+      filter: brightness(.8);
+      transform: translateY(2px);
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="root">
+    <div class="col">
+      <h1 class="title">Comentário</h1>
+      <div class="text-area-container">
+        <textarea id="comment" placeholder="Escreva aqui seu comentário" rows="10"></textarea>
+      </div>
+      <div class="button-container">
+        <button id="createComment">Cadastrar</button>
+      </div>
+    </div>
+    <div class="col">
+      <div>
+        <select id="voice">
+          <option value="ar-AR_OmarVoice">ar-AR_OmarVoice</option>
+          <option value="de-DE_BirgitVoice">de-DE_BirgitVoice</option>
+          <option value="de-DE_BirgitV3Voice">de-DE_BirgitV3Voice</option>
+          <option value="de-DE_DieterVoice">de-DE_DieterVoice</option>
+          <option value="de-DE_DieterV3Voice">de-DE_DieterV3Voice</option>
+          <option value="de-DE_ErikaV3Voice">de-DE_ErikaV3Voice</option>
+          <option value="en-GB_CharlotteV3Voice">en-GB_CharlotteV3Voice</option>
+          <option value="en-GB_JamesV3Voice">en-GB_JamesV3Voice</option>
+          <option value="en-GB_KateVoice">en-GB_KateVoice</option>
+          <option value="en-GB_KateV3Voice">en-GB_KateV3Voice</option>
+          <option value="en-US_AllisonVoice">en-US_AllisonVoice</option>
+          <option value="en-US_AllisonV3Voice">en-US_AllisonV3Voice</option>
+          <option value="en-US_EmilyV3Voice">en-US_EmilyV3Voice</option>
+          <option value="en-US_HenryV3Voice">en-US_HenryV3Voice</option>
+          <option value="en-US_KevinV3Voice">en-US_KevinV3Voice</option>
+          <option value="en-US_LisaVoice">en-US_LisaVoice</option>
+          <option value="en-US_LisaV3Voice">en-US_LisaV3Voice</option>
+          <option value="en-US_MichaelVoice">en-US_MichaelVoice</option>
+          <option value="en-US_MichaelV3Voice">en-US_MichaelV3Voice</option>
+          <option value="en-US_OliviaV3Voice">en-US_OliviaV3Voice</option>
+          <option value="es-ES_EnriqueVoice">es-ES_EnriqueVoice</option>
+          <option value="es-ES_EnriqueV3Voice">es-ES_EnriqueV3Voice</option>
+          <option value="es-ES_LauraVoice">es-ES_LauraVoice</option>
+          <option value="es-ES_LauraV3Voice">es-ES_LauraV3Voice</option>
+          <option value="es-LA_SofiaVoice">es-LA_SofiaVoice</option>
+          <option value="es-LA_SofiaV3Voice">es-LA_SofiaV3Voice</option>
+          <option value="es-US_SofiaVoice">es-US_SofiaVoice</option>
+          <option value="es-US_SofiaV3Voice">es-US_SofiaV3Voice</option>
+          <option value="fr-FR_NicolasV3Voice">fr-FR_NicolasV3Voice</option>
+          <option value="fr-FR_ReneeVoice">fr-FR_ReneeVoice</option>
+          <option value="fr-FR_ReneeV3Voice">fr-FR_ReneeV3Voice</option>
+          <option value="it-IT_FrancescaVoice">it-IT_FrancescaVoice</option>
+          <option value="it-IT_FrancescaV3Voice">it-IT_FrancescaV3Voice</option>
+          <option value="ja-JP_EmiVoice">ja-JP_EmiVoice</option>
+          <option value="ja-JP_EmiV3Voice">ja-JP_EmiV3Voice</option>
+          <option value="ko-KR_YoungmiVoice">ko-KR_YoungmiVoice</option>
+          <option value="ko-KR_YunaVoice">ko-KR_YunaVoice</option>
+          <option value="nl-NL_EmmaVoice">nl-NL_EmmaVoice</option>
+          <option value="nl-NL_LiamVoice">nl-NL_LiamVoice</option>
+          <option selected value="pt-BR_IsabelaVoice">pt-BR_IsabelaVoice</option>
+          <option value="pt-BR_IsabelaV3Voice">pt-BR_IsabelaV3Voice</option>
+          <option value="zh-CN_LiNaVoice">zh-CN_LiNaVoice</option>
+          <option value="zh-CN_WangWeiVoice">zh-CN_WangWeiVoice</option>
+          <option value="zh-CN_ZhangJingVoice">zh-CN_ZhangJingVoice</option>
+        </select>
+      </div>
+      <h1 class="title">Comentários</h1>
+      <div class="comments" id="commentsContainer">
+        <div class="comment">
+          <div class="text">
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis"
+          </div>
+          <button class="playButton">
+            Ouvir
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+
+    document.addEventListener("DOMContentLoaded", (event) => {
+      const commentEl = document.getElementById("comment");
+      const voiceEl = document.getElementById("voice");
+      const commentsContainerEl = document.getElementById("commentsContainer");
+
+      const listen = async (text) => {
+        try {
+          const audio = await axios.post("https://api.us-south.text-to-speech.watson.cloud.ibm.com/instances/7078e44a-67b0-465c-8290-8a48051ec4c9/v1/synthesize", {
+            text
+          },
+            {
+              headers: {
+                "Accept": "audio/wav"
+              },
+              params:{
+                voice: voiceEl.value
+              },
+              auth: {
+                username: 'apikey',
+                password: 'rTdDY8M2CgHcVBpiM8W3fvWnQH857HNt3f76P2Jc1033'
+              },
+              responseType: 'blob'
+            }
+          );
+
+          const blob = new Blob([audio.data], { type: 'audio/wav' });
+          const url = window.URL.createObjectURL(blob)
+
+          window.audio = new Audio();
+          window.audio.src = url;
+          window.audio.play();
+
+          console.log(audio);
+        } catch (error) {
+
+        }
+      }
+
+
+      const deleteComment = async (id) => {
+        try {
+          await axios.delete(`http://localhost:3333/api/comments/${id}`);
+          updateComments();
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      const updateComments = async () => {
+        try {
+          const result = await axios.get("http://localhost:3333/api/comments");
+
+          commentsContainerEl.innerHTML = "";
+
+          result.data.data.forEach(comment => {
+            commentsContainerEl.innerHTML += `
+            <div class="comment">
+              <div class="delete" data-id="${comment.id}">X</div>
+              <div class="text">
+                "${comment.text}"
+              </div>
+              <button class="playButton" data-test="${comment.text}">
+                Ouvir
+              </button>
+            </div >
+            `
+          });
+
+          const playButtons = Array.from(document.getElementsByClassName('playButton'));
+
+          playButtons.forEach(btn => {
+            const text = btn.getAttribute("data-test");
+            btn.onclick = () => {
+              listen(text);
+            }
+          });
+
+          const deleteButtons = Array.from(document.getElementsByClassName('delete'));
+
+          deleteButtons.forEach(btn => {
+            const id = btn.getAttribute("data-id");
+            btn.onclick = () => {
+              deleteComment(id);
+            }
+          });
+
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      const createComment = async (comment) => {
+        try {
+          await axios.post("http://localhost:3333/api/comments", { text: comment });
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      document.getElementById("createComment").onclick = async () => {
+        const comment = commentEl.value;
+        if (comment.length > 0) {
+          await createComment(comment);
+        }
+        commentEl.value = "";
+        updateComments();
+      };
+
+      updateComments();
+    });
+
+  </script>
+</body>
+
+</html>
