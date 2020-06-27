@@ -2,6 +2,11 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+const Watson = {
+  url: process.env.WATSON_URL,
+  key: process.env.WATSON_API_KEY
+};
+
 const Knex = {
   config: {
     client: 'mysql',
@@ -15,4 +20,4 @@ const Knex = {
   }
 };
 
-export default { Knex };
+export default { Knex, Watson };
