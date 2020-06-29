@@ -1,0 +1,120 @@
+:root {
+    --bg: #E0FBFC;
+    --red: #EE6C4D;
+    --black: #293241;
+    --primary: #98c1d9;
+    --secondary: #3D5A80;
+  }
+
+  * {
+    font-family: 'Roboto Mono', monospace;
+    color: var(--black);
+  }
+
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    background-color: var(--bg);
+  }
+
+  .root {
+    display: flex;
+    padding: 20px;
+  }
+
+  .col {
+    width: 50%;
+    padding: 10px;
+  }
+
+  .text-area-container,
+  .button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+  }
+
+  .text-area-container>textarea,
+  .button-container>button {
+    width: 80%;
+  }
+
+  .comment {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20px;
+    min-height: 45px;
+    position: relative;
+  }
+
+  .comment>.text {
+    width: 80%;
+    padding-right: 10px;
+  }
+
+  .comment>button {
+    width: 15%;
+  }
+
+  .comment>button>i {
+    font-size: 1.5em;
+    margin-right: 5px;
+  }
+
+  button {
+    background-color: var(--red);
+    padding-bottom: 10px;
+    padding-top: 5px;
+    color: var(--black);
+    border-bottom: 10px solid var(--secondary);
+    transition: all ease-in-out 200ms;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+  }
+
+  button:hover {
+    filter: brightness(.9);
+  }
+
+  button:active {
+    filter: brightness(.8);
+    border-bottom: 5px solid var(--secondary);
+    transform: translateY(4px);
+  }
+
+  .delete {
+    position: absolute;
+    right: -20px;
+    cursor: pointer;
+  }
+
+  .delete i {
+    color: var(--red) !important;
+    font-weight: bold;
+    transition: all ease-in-out 100ms;
+  }
+
+  .delete i:hover {
+    filter: brightness(.9);
+  }
+
+  .delete:active {
+    filter: brightness(.8);
+    transform: translateY(2px);
+  }
+
+  .separator {
+    position: fixed;
+    width: 4px;
+    height: 80vh;
+    top: 10vh;
+    left: calc(50vw - 12px);
+    background-color: var(--black);
+    filter: opacity(.3);
+    border-radius: 10px;
+  }
